@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+BulletFactory.cs
+Jaan Sangha - 101264598
+Last Modified: Oct 21, 2021
+Description: this script creates each bullet
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

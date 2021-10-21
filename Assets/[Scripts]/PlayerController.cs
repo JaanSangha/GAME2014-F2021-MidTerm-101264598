@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+PlayerController.cs
+Jaan Sangha - 101264598
+Last Modified: Oct 21, 2021
+Description: this script controls the movement and behaviour of the player
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor;
@@ -19,8 +26,6 @@ public class PlayerController : MonoBehaviour
     [Header("Bullet Firing")]
     public float fireDelay;
 
-    float safeSpace;
-
     // Private variables
     private Rigidbody2D m_rigidBody;
     private Vector3 m_touchesEnded;
@@ -30,11 +35,8 @@ public class PlayerController : MonoBehaviour
     {
         m_touchesEnded = new Vector3();
         m_rigidBody = GetComponent<Rigidbody2D>();
-        safeSpace = Screen.safeArea.x;
-        Debug.Log(safeSpace);
-        Debug.Log(Screen.safeArea.xMax);
 
-        //transform.position = new Vector3(safeSpace +10, 0, 0);
+        transform.position = new Vector3(-8.5f, 0, 0);
     }
 
     // Update is called once per frame
@@ -79,18 +81,18 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        //// keyboard support
-        //if (Input.GetAxis("Horizontal") >= 0.1f) 
-        //{
-        //    // direction is positive
-        //    direction = 1.0f;
-        //}
+        // keyboard support
+        if (Input.GetAxis("Vertical") >= 0.1f)
+        {
+            // direction is positive
+            direction = 1.0f;
+        }
 
-        //if (Input.GetAxis("Horizontal") <= -0.1f)
-        //{
-        //    // direction is negative
-        //    direction = -1.0f;
-        //}
+        if (Input.GetAxis("Vertical") <= -0.1f)
+        {
+            // direction is negative
+            direction = -1.0f;
+        }
 
         if (m_touchesEnded.y != 0.0f)
         {
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
             m_rigidBody.velocity *= 0.99f;
         }
     }
-
+    //only move if player is within bounds
     private void _CheckBounds()
     {
         // check right bounds
